@@ -1,2 +1,2 @@
 # vPythonGait
-Gait Analyze
+Gait Simulation
