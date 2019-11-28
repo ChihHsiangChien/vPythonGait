@@ -22,7 +22,9 @@ while True:
     y3 = float(dataNums[7])
     z3 = float(dataNums[8])
 """    
-    
+scene.width = 400
+scene.height = 600
+scene.align='left'
 #縮小比例
 scale = 0.1 #
 
@@ -61,7 +63,7 @@ femur_vertical_axis = vector(0,femur_length*scale*-1,0)
 #產生股骨
 femur = cylinder(pos = hip_joint.pos,
                  axis = femur_vertical_axis,
-                 color = vector(.5,.5,.5), radius= femur_radius * scale)
+                 color = vector(.9, .9 , .9), radius= femur_radius * scale)
 #膝關節位置
 #print(femur.pos)
 knee_joint = sphere(pos= femur.pos + femur.axis,radius = 0.5,opacity = .9,
@@ -76,7 +78,7 @@ tibia_vertical_axis = vector(0,tibia_length*scale*-1,0)
 #產生脛骨
 tibia = cylinder(pos = knee_joint.pos,
                  axis = tibia_vertical_axis,
-                 color = vector(.5,.2,.2), radius= tibia_radius * scale)
+                 color = vector(.8,.8,.8), radius= tibia_radius * scale)
 #踝關節位置
 
 ankle_joint = sphere(pos= tibia.pos + tibia.axis ,radius = 0.4, opacity = .9,
@@ -93,17 +95,17 @@ foot_verticla_axis = vector(0, foot_length * scale*-1, 0 )
 #產生腳掌
 foot = cylinder(pos = ankle_joint.pos,
                 axis = foot_verticla_axis,
-                color = vector(.2,.8,.2), radius= foot_radius * scale, opacity = .7)
+                color = vector(.7,.7,.7), radius= foot_radius * scale, opacity = .7)
 
 
 #攝影機角度
-scene.camera.pos = vector(20,0,0)
-scene.camera.axis = scene.camera.pos * -1
-
+scene.camera.pos = vector(3,-11, -4)
+scene.camera.axis = vector(-4, 11, 6)
 
 #產生角度紀錄圖表
 gr = graph(fast=False,
-           width=600, height=250,
+           align='right',
+           width=400, height=300,
            title='<b>Leg Angle</b>',
            xtitle='<i>time</i>', ytitle='<i>Angle</i>',
            foreground=color.black, background=color.white,
@@ -117,10 +119,11 @@ ankle_angle_curve = gcurve(color = color.blue,label='ankle')
 i = 0 
 while True:
     rate(5)
-    
+    print(scene.camera.pos)
+    print(scene.camera.axis)
     hip_angle = 20 + sin(i)*30
     knee_angle = 40 + sin(i*.5 - 10)*10  
-    ankle_angle = 90 + sin(i)*10
+    ankle_angle = 90 + sin(i-45)*20
     """
     femur_angle = 0
     tibia_angle = 90
