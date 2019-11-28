@@ -5,23 +5,10 @@ from vpython import *
 #Reading Data from serial
 import serial
 import time
-
 sensorData = serial.serial('com9',9600)
-while True:
-    while(sensorData.inWaiting()==0):
-        pass
-    textline = sensorData.readline()
-    dataNums=textline.split(',')
-    x1 = float(dataNums[0])
-    y1 = float(dataNums[1])
-    z1 = float(dataNums[2])
-    x2 = float(dataNums[3])
-    y2 = float(dataNums[4])
-    z2 = float(dataNums[5])
-    x3 = float(dataNums[6])
-    y3 = float(dataNums[7])
-    z3 = float(dataNums[8])
-"""    
+
+"""
+
 scene.width = 400
 scene.height = 600
 scene.align='left'
@@ -119,6 +106,23 @@ ankle_angle_curve = gcurve(color = color.blue,label='ankle')
 i = 0 
 while True:
     rate(5)
+    
+    """
+    while(sensorData.inWaiting()==0):
+        pass
+    textline = sensorData.readline()
+    dataNums=textline.split(',')
+    x1 = float(dataNums[0])
+    y1 = float(dataNums[1])
+    z1 = float(dataNums[2])
+    x2 = float(dataNums[3])
+    y2 = float(dataNums[4])
+    z2 = float(dataNums[5])
+    x3 = float(dataNums[6])
+    y3 = float(dataNums[7])
+    z3 = float(dataNums[8])
+    """        
+    
     print(scene.camera.pos)
     print(scene.camera.axis)
     hip_angle = 20 + sin(i)*30
