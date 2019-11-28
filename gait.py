@@ -23,14 +23,11 @@ while True:
     z3 = float(dataNums[8])
 """    
     
-"""
-基本設定
-"""
+#縮小比例
 scale = 0.1 #
 
-
 """
-產生坐標軸，做為參考用
+產生參考坐標軸
 """
 xaxis = cylinder(pos=vector(0,0,0), axis=vector(10,0,0), color = vector(1,0,0), radius=0.05, opacity = .5) #X axis
 yaxis = cylinder(pos=vector(0,0,0), axis=vector(0,10,0), color = vector(0,1,0), radius=0.05, opacity = .5) #Y axis
@@ -104,15 +101,14 @@ scene.camera.pos = vector(20,0,0)
 scene.camera.axis = scene.camera.pos * -1
 
 
-#產生圖
+#產生角度紀錄圖表
 gr = graph(fast=False,
            width=600, height=250,
            title='<b>Leg Angle</b>',
            xtitle='<i>time</i>', ytitle='<i>Angle</i>',
            foreground=color.black, background=color.white,
-           xmin = 0, xmax=50, ymin=-45, ymax=180
-           
-           )
+           xmin = 0, xmax=50, ymin=-45, ymax=180)
+
 hip_angle_curve = gcurve(color = color.red, label='hip')
 knee_angle_curve = gcurve(color = color.green,label='knee')
 ankle_angle_curve = gcurve(color = color.blue,label='ankle')
@@ -132,7 +128,7 @@ while True:
     """                
     femur.axis = femur_vertical_axis.rotate(angle = radians( hip_angle ), axis = vector(1,0,0) * -1)
     #hip_arraw = arrow(pos=hip_joint.pos, axis= vector(5,0,0), shaftwidth=.3)
-    
+   
     knee_joint.pos = femur.pos + femur.axis
     
     tibia.pos = knee_joint.pos
@@ -140,12 +136,12 @@ while True:
     #knee_arraw = arrow(pos=knee_joint.pos, axis= vector(5,0,0), shaftwidth=.1 , opacity = .2)
                                            
     ankle_joint.pos = tibia.pos + tibia.axis
+    
     foot.pos = ankle_joint.pos
     foot.axis = foot_verticla_axis.rotate(angle = radians( ankle_angle ), axis = vector(1,0,0)*-1)
     #ankle_arraw = arrow(pos=ankle_joint.pos, axis= vector(5,0,0), shaftwidth=.1 ,opacity = .3)
     
-    
-
+    #讓圖表能呈現最新的資料點
     if i > gr.xmax:
         d = i-gr.xmax
         gr.xmin += d
