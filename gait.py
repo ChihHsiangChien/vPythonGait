@@ -27,19 +27,19 @@ Zaxis = cylinder(pos=vector(0,0,0), axis=vector(0,0,10), color = vector(0,0,1), 
 繪製髖、大腿femur、小腿tibia、腳掌foot
 """
 #骨盆setup
-hip_l = 45 #along x axis
-hip_w = 15 #along z axis
-hip_h = 20 #along y axis
+pelvis_l = 15 #along x axis
+pelvis_w = 15 #along z axis
+pelvis_h = 15 #along y axis
 
-hip = box(pos = vector(0,0,0),
-          length = hip_l*scale,
-          height = hip_h*scale,
-          width = hip_w*scale,
+pelvis = box(pos = vector(0,0,0),
+          length = pelvis_l*scale,
+          height = pelvis_h*scale,
+          width = pelvis_w*scale,
           color = vector(.3, .4, .5),
           opacity = .2)
 
 #髖關節位置
-hip_joint = sphere(pos=vector(hip.pos.x + 1 ,0,0),radius=0.5)
+hip_joint = sphere(pos=vector(pelvis.pos.x + 1 ,0,0),radius=0.5)
 
 
 #股骨setup
@@ -86,8 +86,8 @@ foot = cylinder(pos = ankle_joint.pos,
 
 
 #攝影機角度
-scene.camera.pos = vector(3,-11, -4)
-scene.camera.axis = vector(-4, 11, 6)
+scene.camera.pos = vector(7,-2, 0)
+scene.camera.axis = vector(-7, -2, 0)
 
 #產生角度紀錄圖表
 gr = graph(fast=False,
