@@ -10,15 +10,15 @@ sensor = serial.Serial(COM_PORT, BAUD_RATES)   # 初始化序列通訊埠
 
 scene.width = 400
 scene.height = 600
-scene.align='left'
+scene.align = 'left'
 
 
 """
 產生參考坐標軸
 """
-xaxis = cylinder(pos=vector(0,0,0), axis=vector(100,0,0), color = vector(1,0,0), radius=0.5, opacity = .5) #X axis
-yaxis = cylinder(pos=vector(0,0,0), axis=vector(0,100,0), color = vector(0,1,0), radius=0.5, opacity = .5) #Y axis
-Zaxis = cylinder(pos=vector(0,0,0), axis=vector(0,0,100), color = vector(0,0,1), radius=0.5, opacity = .5) #Z axis
+x_axis = cylinder(pos=vector(0,0,0), axis=vector(100,0,0), color = vector(1,0,0), radius=0.5, opacity = .5) #X axis
+y_axis = cylinder(pos=vector(0,0,0), axis=vector(0,100,0), color = vector(0,1,0), radius=0.5, opacity = .5) #Y axis
+z_axis = cylinder(pos=vector(0,0,0), axis=vector(0,0,100), color = vector(0,0,1), radius=0.5, opacity = .5) #Z axis
 
                 
 """
@@ -74,7 +74,6 @@ left_ankle_joint = sphere(pos= left_tibia.pos + left_tibia.axis ,radius = 4, opa
 #腳掌設定
 left_foot_radius = 3 #  腳掌寬度
 left_foot_length = 25 #  腳掌長度 
-dist_btw_ankle_midfoot = 7 #踝關節和腳中間的距離
 left_foot_verticla_axis = vector(0, left_foot_length*-1, 0 )
 
 
@@ -109,13 +108,13 @@ gr = graph(fast=False,
            align='right',
            width=400, height=300,
            title='<b>Leg Angle</b>',
-           xtitle='<i>time</i>', ytitle='<i>Angle</i>',
+           xtitle='<i>time</i>', ytitle='<b>Angle</b>',
            foreground=color.black, background=color.white,
            xmin = 0, xmax=50, ymin=-45, ymax=180)
 
-hip_angle_curve = gcurve(color = color.red, label='hip')
-knee_angle_curve = gcurve(color = color.green,label='knee')
-ankle_angle_curve = gcurve(color = color.blue,label='ankle')
+hip_angle_curve = gcurve(color = color.red, label = 'hip')
+knee_angle_curve = gcurve(color = color.green,label = 'knee')
+ankle_angle_curve = gcurve(color = color.blue,label = 'ankle')
 
 
 i=0
@@ -130,18 +129,16 @@ try:
             data = data_raw.decode()        # 用預設的UTF-8解碼
             data = data.replace(" ", "")    #去除所有的空白
             data = data.replace("\r\n", "") #去除換行符號
-            if len(data)==0:continue        #如果是空資料則不處理，略過此迴圈
+            if len(data) == 0:continue        #如果是空資料則不處理，略過此迴圈
             dataNums=data.split(',')        #將資料以逗號分隔
     
             #sensor_id = int(float(dataNums[0]))
             sensor_id = 3
             
             pitch_angle = int(float(dataNums[1]))
-            roll_angle= int(float(dataNums[2]))
+            roll_angle = int(float(dataNums[2]))
             yaw_angle = int(float(dataNums[3]))
             
-
-
            
             if sensor_id == 0 :
                 pelvis_pitch_angle = 90 - pitch_angle
@@ -163,7 +160,6 @@ try:
                 left_ankle_roll_angle = roll_angle
                 left_ankle_yaw_angle = 180 - yaw_angle
                  
-
             
             pelvis.up = pelvis_vertical_axis.rotate(angle = radians( pelvis_pitch_angle ), axis = vector(1,0,0) *-1)
             pelvis.up = pelvis.up.rotate(angle = radians( pelvis_roll_angle ), axis = vector(0,0,1) )
