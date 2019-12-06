@@ -31,8 +31,8 @@ pelvis_height = 10 #along y axis
 
 pelvis = box(pos = vector(0,0,0),
           length = pelvis_length,
-          height = pelvis_width,
-          width = pelvis_height,
+          height = pelvis_height,
+          width = pelvis_width,
           color = vector(.3, .4, .5),
           opacity = .8)
 
@@ -160,8 +160,8 @@ try:
                 left_ankle_yaw_angle = 180 - yaw_angle
                  
             
-            pelvis.up = vector(0,pelvis_height,0).rotate(angle = radians( pelvis_pitch_angle ), axis = vector(1,0,0) )
-            #pelvis.up = pelvis.up.rotate(angle = radians( pelvis_roll_angle ), axis = vector(0,0,1) )
+            #pelvis.up = vector(0,pelvis_height,0).rotate(angle = radians( pelvis_pitch_angle ), axis = vector(1,0,0) )
+            pelvis.up = vector(0,pelvis_height,0).rotate(angle = radians( pelvis_roll_angle ), axis = vector(0,0,1) )
             pelvis.axis = vector(pelvis_length,0,0).rotate(angle = radians( pelvis_yaw_angle ), axis = vector(0,1,0) )
 
             left_hip_joint.pos = pelvis.pos + .5*pelvis.axis
