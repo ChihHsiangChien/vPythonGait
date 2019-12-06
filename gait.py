@@ -28,7 +28,6 @@ z_axis = cylinder(pos=vector(0,0,0), axis=vector(0,0,100), color = vector(0,0,1)
 pelvis_length = 30 #along x axis
 pelvis_width = 20 #along z axis
 pelvis_height = 10 #along y axis
-pelvis_vertical_axis = vector(0,pelvis_height,0)
 
 pelvis = box(pos = vector(0,0,0),
           length = pelvis_length,
@@ -133,7 +132,7 @@ try:
             dataNums=data.split(',')        #將資料以逗號分隔
     
             #sensor_id = int(float(dataNums[0]))
-            sensor_id = 3
+            sensor_id = 0
             
             pitch_angle = int(float(dataNums[1]))
             roll_angle = int(float(dataNums[2]))
@@ -161,8 +160,8 @@ try:
                 left_ankle_yaw_angle = 180 - yaw_angle
                  
             
-            pelvis.up = pelvis_vertical_axis.rotate(angle = radians( pelvis_pitch_angle ), axis = vector(1,0,0) *-1)
-            pelvis.up = pelvis.up.rotate(angle = radians( pelvis_roll_angle ), axis = vector(0,0,1) )
+            pelvis.up = vector(0,pelvis_height,0).rotate(angle = radians( pelvis_pitch_angle ), axis = vector(1,0,0) )
+            #pelvis.up = pelvis.up.rotate(angle = radians( pelvis_roll_angle ), axis = vector(0,0,1) )
             pelvis.axis = vector(pelvis_length,0,0).rotate(angle = radians( pelvis_yaw_angle ), axis = vector(0,1,0) )
 
             left_hip_joint.pos = pelvis.pos + .5*pelvis.axis
