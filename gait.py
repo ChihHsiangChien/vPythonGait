@@ -140,7 +140,7 @@ try:
             
            
             if sensor_id == 0 :
-                pelvis_pitch_angle = 90 - pitch_angle
+                pelvis_pitch_angle =  pitch_angle
                 pelvis_roll_angle = roll_angle
                 pelvis_yaw_angle = 180 - yaw_angle
      
@@ -160,7 +160,7 @@ try:
                 left_ankle_yaw_angle = 180 - yaw_angle
                  
             
-            #pelvis.up = vector(0,pelvis_height,0).rotate(angle = radians( pelvis_pitch_angle ), axis = vector(1,0,0) )
+            #pelvis.up = vector(0,pelvis_height,0).rotate(angle = radians( pelvis_pitch_angle ), axis = vector(-1,0,0) )
             pelvis.up = vector(0,pelvis_height,0).rotate(angle = radians( pelvis_roll_angle ), axis = vector(0,0,1) )
             pelvis.axis = vector(pelvis_length,0,0).rotate(angle = radians( pelvis_yaw_angle ), axis = vector(0,1,0) )
 
