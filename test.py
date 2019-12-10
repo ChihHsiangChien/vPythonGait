@@ -30,8 +30,17 @@ pelvis = box(pos = vector(0,0,0),
           length = pelvis_length,
           height = pelvis_height,
           width = pelvis_width,
+          up=vector(0,1,0),
           color = vector(.3, .4, .5),
-          opacity = .8)
+          opacity = .2)
+
+#pelvis_front_axis = pelvis.up.rotate(angle = radians(90), axis = vector(1,0,0))
+pelvis_front_axis = cross(pelvis.axis,pelvis.up) 
+
+pelvis_front_pointer = arrow(pos = pelvis.pos, axis = pelvis_front_axis, shaftwidth=2, color = color.white)
+
+pelvis_up_pointer = arrow(pos = pelvis.pos, axis = pelvis.up*20, shaftwidth=2, color = vector(.8, .5, .5))
+
 
 try:
     while True:
@@ -55,13 +64,29 @@ try:
             
            
             if sensor_id == 0 :
-                pelvis_pitch_angle =  pitch_angle
+                pelvis_pitch_angle =  -pitch_angle
                 pelvis_roll_angle = roll_angle
-                pelvis_yaw_angle = 180 - yaw_angle
+                pelvis_yaw_angle = -yaw_angle
             
-            pelvis.up = vector(0,pelvis_height,0).rotate(angle = radians( pelvis_pitch_angle ), axis = vector(-1,0,0))
-            pelvis.up = vector(0,pelvis_height,0).rotate(angle = radians( pelvis_roll_angle ), axis = vector(0,0,1) )
-            pelvis.axis = vector(pelvis_length,0,0).rotate(angle = radians( pelvis_yaw_angle ), axis = vector(0,1,0) )
+            #pitch  yaw 
+            #pelvis.up = vector(0,pelvis_height,0).rotate(angle = radians( pelvis_pitch_angle ), axis = vector(1,0,0))
+            #pelvis.axis = vector(pelvis_length,0,0).rotate(angle = radians( pelvis_yaw_angle ), axis = vector(0,1,0))
+            
+            #roll yaw
+            #pelvis.axis = vector(pelvis_length,0,0).rotate(angle = radians( pelvis_roll_angle ), axis =  cross(pelvis.axis,pelvis.up) )
+            #pelvis.axis = pelvis.axis.rotate(angle = radians( pelvis_yaw_angle ), axis = vector(0,1,0))
+            
+            #pitch roll
+            pelvis.up = vector(0,pelvis_height,0).rotate(angle = radians( pelvis_pitch_angle ), axis = vector(1,0,0))
+            pelvis.axis = vector(pelvis_length,0,0).rotate(angle = radians( pelvis_roll_angle ), axis =  cross(pelvis.axis,pelvis.up) )
+            
+            pelvis_front_pointer.axis = cross(pelvis.axis,pelvis.up) *.1
+            pelvis_up_pointer.axis = pelvis.up 
+            
+            
+            
+            
+            
 
 except KeyboardInterrupt:
     sensor.close()    # 清除序列通訊物件
